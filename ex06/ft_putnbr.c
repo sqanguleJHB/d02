@@ -1,42 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_comb.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sqangule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/17 14:15:26 by sqangule          #+#    #+#             */
-/*   Updated: 2020/06/19 14:17:27 by sqangule         ###   ########.fr       */
+/*   Created: 2020/06/19 13:19:48 by sqangule          #+#    #+#             */
+/*   Updated: 2020/06/19 14:16:11 by sqangule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
+
 int		ft_putchar(char c);
 
-void	ft_print_comb(void)
+void	ft_putnbr(int nb)
 {
-	int		n1;
-	int		n2;
-	int		n3;
+	int		copy_of_nb;
+	int		divider;
 
-	n1 = -1;
-	while (n1 <= 9)
+	if (nb < 0)
 	{
-		n2 = ++n1;
-		while (n2 <= 9)
+		ft_putchar('-');
+		if (nb == INT_MIN)
 		{
-			n3 = ++n2 + 1;
-			while (n3 <= 9)
-			{
-				ft_putchar(n1 + '0');
-				ft_putchar(n2 + '0');
-				ft_putchar(n3++ + '0');
-				if (n1 != 7)
-				{
-					ft_putchar(',');
-					ft_putchar(' ');
-				}
-			}
+			nb += 2000000000;
+			ft_putchar('2');
 		}
+		nb = -nb;
 	}
-	ft_putchar('\n');
+	copy_of_nb = nb;
+	divider = 1;
+	while (copy_of_nb /= 10)
+		divider *= 10;
+	while (divider)
+	{
+		ft_putchar((nb / divider) + '0');
+		nb %= divider;
+		divider /= 10;
+	}
 }
